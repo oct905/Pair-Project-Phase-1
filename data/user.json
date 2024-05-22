@@ -1,15 +1,15 @@
 [
     {
-        "email": "fsmallsman0@drupal.org",
-        "userName": "mjinkinson0",
-        "password": "rG6.fLuTt8Zg=",
-        "role": "user"
-    },
-    {
         "email": "jtume1@typepad.com",
         "userName": "amarwood1",
         "password": "bR6=|U6e5",
         "role": "admin"
+    },
+    {
+        "email": "fsmallsman0@drupal.org",
+        "userName": "mjinkinson0",
+        "password": "rG6.fLuTt8Zg=",
+        "role": "user"
     },
     {
         "email": "rslessor2@geocities.com",
