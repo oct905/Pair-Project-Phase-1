@@ -15,7 +15,19 @@ module.exports = class ControllerAdmin{
             console.log(req.params);
             let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
-            res.render(`learningMaterial`, { data, id })
+            let user = req.session.user
+            res.render(`learningMaterial`, { data, id, user })
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async deleteUser(req, res) {
+        try {
+            const { id } = req.params
+            await UserCourse.destroy({where: {id}})
+            res.redirect('/admin/usercourse')
+            // console.log(id);
         } catch (error) {
             res.send(error)
         }

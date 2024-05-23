@@ -24,6 +24,7 @@
                     <th class="py-2 px-4 text-left">Course</th>
                     <th class="py-2 px-4 text-left">Enroll Date</th>
                     <th class="py-2 px-4 text-left">Status</th>
+                    <th class="py-2 px-4 text-left">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +38,11 @@
                         <% } else { %>
                             <td class="py-2 px-4 text-green-500">Completed At <%= element.completedDate %></td>
                         <% } %>
+                        <td class="py-2 px-4">
+                            <a href="/admin/delete/<%= element.id %>">
+                                <button style="color: #fff; background-color: rgb(241, 102, 52); font-weight: 500; text-decoration: none; letter-spacing: 1px; padding: 5px 10px; border-radius: 20px; transition: 0.3; transition-property: bacground;">Delete</button>
+                            </a>
+                        </td>
                     </tr>
                 <% }) %>
             </tbody>

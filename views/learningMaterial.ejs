@@ -26,8 +26,11 @@
                             <p><%= data.materials %></p>
                         </div>
                         <div class="course-actions">
-                            <a href="#"><button>Download</button></a>
-                            <a href="/user/course/<%= id %>/learn/<%= data.id %>/complete"><button>Complete</button></a>
+                            <% if (user.role === `admin`) { %>
+                            <% } else { %>
+                                <a href="/user/download/<%= data.id %>"><button>Download</button></a>
+                                <a href="/user/course/<%= id %>/learn/<%= data.id %>/complete"><button>Complete</button></a>
+                            <% } %>
                         </div>
             </div>
         </div>
