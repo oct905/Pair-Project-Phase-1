@@ -1,6 +1,4 @@
 
-class ControllerAdmin{
+module.exports = class ControllerAdmin{
 
 }
-
-module.exports = ControllerAdmin

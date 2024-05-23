@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      LearningMaterial.belongsTo(models.Course)
       // define association here
     }
   }

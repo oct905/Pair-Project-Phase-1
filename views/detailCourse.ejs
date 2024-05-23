@@ -8,7 +8,28 @@
 <body>
     <a href="/"><button>Home</button></a>
     <h1>Detail Course</h1>
-    <a href="/user/username/course/id/learn"><button>Learn</button></a>
-    <a href="/user/username/enroll"><button>Enroll</button></a>
+    <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>
+
+    <div>
+        <table border="1">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Learning Material</th>
+            </tr>
+            <tr>
+                <td><img src="<%= course.imageURL %>" alt=""></td>
+                <td><%= course.name %></td>
+                <td><%= course.description %></td>
+                <td>
+                    <% course.LearningMaterials.forEach((element) => { %>
+                        <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><%= element.name %></a><br>
+
+                    <% }) %>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
