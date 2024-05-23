@@ -1,8 +1,10 @@
-
-class ControllerUser{
+const { Course, UserCourse, User, LearningMaterial } = require(`../models`)
+module.exports = class ControllerUser{
     static async renderProfile(req,res){
         try {
-            res.render(`profile`)
+            console.log(req.session.user);
+            let user = req.session.user
+            res.render(`profile`, {user})
         } catch (error) {
             res.send(error)
         }
@@ -18,7 +20,9 @@ class ControllerUser{
     
     static async handleEnroll(req, res){
         try {
-            res.redirect('/course/id')
+            let {id} = req.params
+            console.log(`ok`);
+            res.redirect(`/course/${id}`)
         } catch (error) {
             res.send(error)
         }
@@ -26,19 +30,21 @@ class ControllerUser{
 
     static async renderRenderLearn(req, res){
         try {
-            res.render(`learningMaterial`)
+            // console.log(req.params); ====================
+            let {idmat} = req.params
+            let data = await LearningMaterial.findByPk(idmat)
+            // console.log(data); =================
+            res.render(`learningMaterial`, {data})
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async handlleComplete(req, res){
+    static async handleComplete(req, res){
         try {
-            res.redirect(`/course/id`)
+            res.redirect(`/`)
         } catch (error) {
             res.send(error)
         }
     }
 }
-
-module.exports = ControllerUser
