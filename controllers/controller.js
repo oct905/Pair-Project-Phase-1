@@ -22,7 +22,11 @@ module.exports = class Controller {
     }
 
     static renderSignUp(req, res) {
-        res.render('signUp')
+        let msg = req.query.error
+        if (msg) {
+            msg = msg.split(',')
+        }
+        res.render('signUp', { msg })
     }
 
     static async handleSignUp(req, res) {
@@ -41,12 +45,22 @@ module.exports = class Controller {
             })
             res.redirect(`/login`)
         } catch (error) {
-            res.render(error)
+            if (error.name === `SequelizeValidationError`) {
+                let msg = error.errors.map(el => el.message)
+                console.log(msg);
+                res.redirect(`/signUp?error=${msg}`)
+            } else {
+                res.redirect(`/signUp?error=${error}`)
+            }
         }
     }
 
     static renderLogin(req, res) {
-        res.render(`login`)
+        let msg = req.query.error
+        if (msg) {
+            msg = msg.split(',')
+        }
+        res.render(`login`,{ msg })
     }
 
     static async handleLogin(req, res) {
@@ -61,17 +75,24 @@ module.exports = class Controller {
             })
             if (!user) throw 'Incorrect Username'
 
-            const isValid = bcryptjs.compare(password, user.password)
+            const isValid = bcryptjs.compareSync(password, user.password)
 
-            if (!isValid) throw 'Incorrect Password'
+            if (!isValid) {
+                throw 'Incorrect Password'
+            }
 
             user = JSON.parse(JSON.stringify(user))
             delete user.password
             req.session.user = user
             res.redirect('/')
         } catch (error) {
-            console.log(error);
-            res.redirect(`/login?error=${error}`)
+            if (error.name === `SequelizeValidationError`) {
+                let msg = error.errors.map(el => el.message)
+                console.log(msg);
+                res.redirect(`/login?error=${msg}`)
+            } else {
+                res.redirect(`/login?error=${error}`)
+            }
         }
     }
 
@@ -84,7 +105,7 @@ module.exports = class Controller {
         try {
             let userId = req.session.user
             let user = ''
-            if(userId){
+            if (userId) {
                 user = await User.findByPk(userId.id, {
                     include: UserCourse
                 })

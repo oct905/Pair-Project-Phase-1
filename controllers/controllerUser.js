@@ -1,4 +1,5 @@
-const { where } = require("sequelize")
+const express = require(`express`)
+const pdfService = require(`../helper/pdf-service`)
 const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../models`)
 module.exports = class ControllerUser {
     static async renderProfile(req, res) {
@@ -37,7 +38,7 @@ module.exports = class ControllerUser {
 
             let CourseId = req.params.id
             let enrollDate = new Date()
-            
+
             let UserId = req.session.user.id
             let user = await User.findByPk(UserId, {
                 include: UserCourse
@@ -59,7 +60,9 @@ module.exports = class ControllerUser {
             console.log(req.params);
             let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
-            res.render(`learningMaterial`, { data, id })
+            let user = req.session.user
+            req.session.data = data
+            res.render(`learningMaterial`, { data, id, user })
         } catch (error) {
             res.send(error)
         }
@@ -67,22 +70,22 @@ module.exports = class ControllerUser {
 
     static async handleComplete(req, res) {
         try {
-            let {id, idmat} = req.params
+            let { id, idmat } = req.params
             let data = req.session.user.UserCourses
-            console.log(`\n`, `=============`,data);
+            console.log(`\n`, `=============`, data);
             let userCourseId = 0
             id = Number(id)
             data.forEach(element => {
                 console.log(id, element);
-                if(id === element.CourseId){
+                if (id === element.CourseId) {
                     userCourseId = element.id
                 }
             });
             console.log(userCourseId);
             let completedDate = new Date()
-            await UserCourse.update({completedDate},{
-                where:{
-                    id : userCourseId
+            await UserCourse.update({ completedDate }, {
+                where: {
+                    id: userCourseId
                 }
             })
             console.log(`================`);
@@ -91,4 +94,20 @@ module.exports = class ControllerUser {
             res.send(error)
         }
     }
+
+    // static async download(res, req, next) {
+    //     try {
+    //         console.log(`download controller`);
+    //         const stream = res.writeHead(200, {
+    //             'Content-Type': 'application/pdf',
+    //             'content-disposition': 'attachment;filename=invoice.pdf'
+    //         })
+    //         pdfService.buildPDF(
+    //             (chunk) => stream.write(chunk),
+    //             () => stream.end()
+    //         )
+    //     } catch (error) {
+    //         res.send(error)
+    //     }
+    // }
 }
