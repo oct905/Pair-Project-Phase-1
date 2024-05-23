@@ -4,29 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFFAE6;
+        }
+    </style>
 </head>
-<body>
-    <a href="/">Home</a>
-    <h1>User Course</h1>
-    <table border="1">
-        <tr>
-            <td>Username</td>
-            <td>Course</td>
-            <td>Enroll Date</td>
-            <td>Status</td>
-        </tr>
-        <% data.forEach(element => { %>
-            <tr>
-            <td><%= element.UserId %></td>
-            <td><%= element.CourseId %></td>
-            <td><%= element.localDateId %></td>
-            <% if (!element.completedDate) { %>
-                <td>Ongoing</td>
-            <% } else { %>
-                <td>Completed At <%= element.completedDate %></td>
-            <% } %>
-            </tr>
-        <% }) %>
-    </table>
+<body class="min-h-screen flex flex-col items-center py-10">
+    <a href="/" class="text-blue-500 hover:underline mb-5">
+        <button>Home</button>
+    </a>
+    <h1 class="text-3xl font-bold mb-5">User Course</h1>
+    <div class="overflow-x-auto w-full max-w-4xl">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead>
+                <tr class="bg-gray-100 border-b">
+                    <th class="py-2 px-4 text-left">Username</th>
+                    <th class="py-2 px-4 text-left">Course</th>
+                    <th class="py-2 px-4 text-left">Enroll Date</th>
+                    <th class="py-2 px-4 text-left">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(element => { %>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-2 px-4"><%= element.UserId %></td>
+                        <td class="py-2 px-4"><%= element.CourseId %></td>
+                        <td class="py-2 px-4"><%= element.localDateId %></td>
+                        <% if (!element.completedDate) { %>
+                            <td class="py-2 px-4 text-yellow-500">Ongoing</td>
+                        <% } else { %>
+                            <td class="py-2 px-4 text-green-500">Completed At <%= element.completedDate %></td>
+                        <% } %>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
