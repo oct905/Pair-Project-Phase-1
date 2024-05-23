@@ -8,7 +8,23 @@
 <body>
     <a href="/"><button>Home</button></a>
     <h1>Detail Course</h1>
-    <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>
+    <% if (user) { %>
+        <% if (user.UserCourses.length === 0) { %>
+            <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>
+        <% } %>
+
+        <% for( let index = 0; index < user.UserCourses.length; index++ ) { %>
+            <% if (course.id === user.UserCourses[index].CourseId) { %>
+                <% break %>
+            <% } %>
+
+            <% if (index === user.UserCourses.length - 1 ) { %>
+                <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>       
+            <% } %>
+        <% } %>
+    <% } else { %>
+            <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>       
+    <% } %>
 
     <div>
         <table border="1">

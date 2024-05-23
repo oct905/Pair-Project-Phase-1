@@ -36,8 +36,26 @@
                     <td><%= element.name %></td>
                     <td><%= element.description %></td>
                     <td>
-                        <a href="/course/<%= element.id %>"><button>Detail</button></a>
-                        <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                        <% if (user) { %>
+                            <% if (user.UserCourses.length === 0) { %>
+                                <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                            <% } %>
+                            
+                            <% for ( let index = 0; index < user.UserCourses.length; index++){%>
+                                <% if (user.UserCourses[index].CourseId === element.id) { %>
+                                    <a href="/course/<%= element.id %>"><button>Learn</button></a>
+                                    <% break %>
+                                <% } %>
+                                <% if (index === user.UserCourses.length - 1) { %>
+                                    <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                    <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                                <% } %>
+                            <% } %>
+                        <% } else { %>
+                            <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                            <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                        <% } %>
                     </td>
                 </tr>
             <% }) %>

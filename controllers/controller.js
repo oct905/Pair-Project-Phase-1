@@ -1,11 +1,12 @@
 const bcryptjs = require('bcryptjs')
-const { Course, UserCourse, User, LearningMaterial } = require(`../models`)
+const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../models`)
 module.exports = class Controller {
     static async renderLandingPage(req, res) {
         try {
             if (req.session.user) {
                 console.log(`login`);
-            }else{
+
+            } else {
                 console.log(`logout`);
             }
 
@@ -14,8 +15,7 @@ module.exports = class Controller {
             })
 
             let user = req.session.user
-            // console.log(user); ============================
-            res.render('home', { course , user})
+            res.render('home', { course, user })
         } catch (error) {
             res.send(error)
         }
@@ -28,9 +28,16 @@ module.exports = class Controller {
     static async handleSignUp(req, res) {
         try {
             let { userName, email, password } = req.body
-            console.log(req.body);
             await User.create({
                 userName, email, password
+            })
+            let user = await User.findAll()
+            let id = user[user.length - 1].id
+            await Profile.create({
+                fullName: '',
+                age: null,
+                address: '',
+                UserId: id
             })
             res.redirect(`/login`)
         } catch (error) {
@@ -47,6 +54,7 @@ module.exports = class Controller {
             let { userName, password } = req.body
 
             let user = await User.findOne({
+                include: UserCourse,
                 where: {
                     userName
                 }
@@ -60,7 +68,6 @@ module.exports = class Controller {
             user = JSON.parse(JSON.stringify(user))
             delete user.password
             req.session.user = user
-            console.log(req.session.user);
             res.redirect('/')
         } catch (error) {
             console.log(error);
@@ -75,6 +82,16 @@ module.exports = class Controller {
 
     static async renderDetail(req, res) {
         try {
+            let userId = req.session.user
+            let user = ''
+            if(userId){
+                user = await User.findByPk(userId.id, {
+                    include: UserCourse
+                })
+            }
+            user = JSON.parse(JSON.stringify(user))
+            delete req.session.user
+            req.session.user = user
             let { id } = req.params
             let course = await Course.findByPk(id, {
                 include: [{
@@ -85,9 +102,8 @@ module.exports = class Controller {
                 },
                     LearningMaterial,
                 ]
-            })
-            // res.send(course)
-            res.render(`detailCourse`, { course })
+            });
+            res.render(`detailCourse`, { course, user, id })
         } catch (error) {
             res.send(error)
         }
