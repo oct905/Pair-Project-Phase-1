@@ -1,3 +1,4 @@
+const { where } = require("sequelize")
 const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../models`)
 module.exports = class ControllerUser {
     static async renderProfile(req, res) {
@@ -44,8 +45,6 @@ module.exports = class ControllerUser {
             user = JSON.parse(JSON.stringify(user))
             delete req.session.user
             req.session.user = user
-            console.log(req.session.user);
-
             await UserCourse.create({
                 UserId, CourseId, enrollDate
             })
@@ -55,11 +54,12 @@ module.exports = class ControllerUser {
         }
     }
 
-    static async renderRenderLearn(req, res) {
+    static async renderLearn(req, res) {
         try {
-            let { idmat } = req.params
+            console.log(req.params);
+            let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
-            res.render(`learningMaterial`, { data })
+            res.render(`learningMaterial`, { data, id })
         } catch (error) {
             res.send(error)
         }
@@ -67,7 +67,26 @@ module.exports = class ControllerUser {
 
     static async handleComplete(req, res) {
         try {
-            res.redirect(`/`)
+            let {id, idmat} = req.params
+            let data = req.session.user.UserCourses
+            console.log(`\n`, `=============`,data);
+            let userCourseId = 0
+            id = Number(id)
+            data.forEach(element => {
+                console.log(id, element);
+                if(id === element.CourseId){
+                    userCourseId = element.id
+                }
+            });
+            console.log(userCourseId);
+            let completedDate = new Date()
+            await UserCourse.update({completedDate},{
+                where:{
+                    id : userCourseId
+                }
+            })
+            console.log(`================`);
+            res.redirect(`/course/${id}`)
         } catch (error) {
             res.send(error)
         }
