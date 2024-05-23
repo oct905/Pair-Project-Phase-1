@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Course</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <h1>User Course</h1>
+    <table border="1">
+        <tr>
+            <td>Username</td>
+            <td>Course</td>
+            <td>Enroll Date</td>
+            <td>Status</td>
+        </tr>
+        <% data.forEach(element => { %>
+            <tr>
+            <td><%= element.UserId %></td>
+            <td><%= element.CourseId %></td>
+            <td><%= element.localDateId %></td>
+            <% if (!element.completedDate) { %>
+                <td>Ongoing</td>
+            <% } else { %>
+                <td>Completed At <%= element.completedDate %></td>
+            <% } %>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

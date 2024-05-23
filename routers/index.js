@@ -2,6 +2,7 @@ const express = require(`express`)
 const Controller = require("../controllers/controller")
 const Check = require("../middleware/Check")
 const user = require("./user")
+const admin = require("./admin")
 const router = express.Router()
 
 router.get(`/`, Controller.renderLandingPage)
@@ -17,5 +18,6 @@ router.get(`/signup`, Check.isLoggedOut, Controller.renderSignUp)
 router.post(`/signup`, Controller.handleSignUp)
 
 router.use(`/user`, user)
+router.use(`/admin`, admin)
 
 module.exports = router

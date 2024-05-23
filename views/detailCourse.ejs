@@ -28,7 +28,9 @@
                     <p><%= course.description %></p>
                     <div class="course-actions">
                         <% if (user) { %>
-                            <% if (user.UserCourses.length === 0) { %>
+                            <% if (user.role === `admin`) { %>
+                                
+                            <% } else if (user.UserCourses.length === 0) { %>
                                 <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>
                             <% } %>
                     
@@ -53,7 +55,12 @@
                             <h2><%= element.name %></h2>
                         </div>
                         <div class="course-actions">
-                            <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><button>Begin Course</button></a>
+                            <% if (user.role) { %>
+                                <a href="/admin/course/<%= course.id %>/learn/<%= element.id %>"><button>Material Detail</button></a>
+                            <% } else { %>
+                                <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><button>Begin Course</button></a>
+                             
+                            <% } %>
                         </div>
                     </div>
                 <% }) %>

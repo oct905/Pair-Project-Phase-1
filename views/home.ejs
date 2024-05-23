@@ -14,11 +14,16 @@
         <header>
             <h2><a href="#" class="logo">Logo</a></h2>
             <div class="navigation">
-                <a href="/login">Login</a>
-                <a href="/signup">SignUp</a>
-                <a href="/user/profile">Profile</a>
-                <a href="/logout">LogOut</a>
-                <a href="#">Users</a>
+                <% if (!user) { %>
+                    <a href="/login">Login</a>
+                    <a href="/signup">SignUp</a>
+                <% } else if (user.role === `admin`) { %>
+                    <a href="/admin/usercourse">Users</a>
+                    <a href="/logout">LogOut</a>
+                <% } else { %>
+                    <a href="/user/profile">Profile</a>
+                    <a href="/logout">LogOut</a>
+                <% } %>
             </div>
         </header>
         <div class="content">
@@ -47,7 +52,9 @@
                         </div>
                         <div class="course-actions">
                             <% if (user) { %>
-                                <% if (user.UserCourses.length === 0) { %>
+                                <% if (user.role === `admin`) { %>
+                                    <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                <% } else if (user.UserCourses.length === 0) { %>
                                     <a href="/course/<%= element.id %>"><button>Detail</button></a>
                                     <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
                                 <% } %>
