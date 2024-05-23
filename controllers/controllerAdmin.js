@@ -3,7 +3,9 @@ const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../mode
 module.exports = class ControllerAdmin{
     static async renderUserCourse(req, res){
         try {
-            let data = await UserCourse.findAll()
+            let data = await UserCourse.findAll({
+                include :[Course, User]
+            })
             res.render(`userCourse`, {data})
         } catch (error) {
             res.send(error)

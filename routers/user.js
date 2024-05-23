@@ -11,7 +11,7 @@ user.get(`/enroll/course/:id`, Check.isLoggedIn, Check.isUser, ControllerUser.ha
 
 user.get(`/course/:id/learn/:idmat`, Check.isLoggedIn, Check.isUser, Check.isEnrolled, ControllerUser.renderLearn)
 
-user.get(`/course/:id/learn/:idmat/complete`, Check.isEnrolled, ControllerUser.handleComplete)
+user.get(`/course/:id/learn/:idmat/complete`, Check.isLoggedIn, Check.isUser, Check.isEnrolled, ControllerUser.handleComplete)
 user.get(`/download/:id`, (req, res, next) => {
     const stream = res.writeHead(200, {
         'Content-Type' : 'application/pdf',
