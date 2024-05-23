@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Course</title>
+</head>
+<body>
+    <a href="/"><button>Home</button></a>
+    <h1>Detail Course</h1>
+    <% if (user) { %>
+        <% if (user.UserCourses.length === 0) { %>
+            <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>
+        <% } %>
+
+        <% for( let index = 0; index < user.UserCourses.length; index++ ) { %>
+            <% if (course.id === user.UserCourses[index].CourseId) { %>
+                <% break %>
+            <% } %>
+
+            <% if (index === user.UserCourses.length - 1 ) { %>
+                <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>       
+            <% } %>
+        <% } %>
+    <% } else { %>
+            <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>       
+    <% } %>
+
+    <div>
+        <table border="1">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Learning Material</th>
+            </tr>
+            <tr>
+                <td><img src="<%= course.imageURL %>" alt=""></td>
+                <td><%= course.name %></td>
+                <td><%= course.description %></td>
+                <td>
+                    <% course.LearningMaterials.forEach((element) => { %>
+                        <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><%= element.name %></a><br>
+
+                    <% }) %>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
