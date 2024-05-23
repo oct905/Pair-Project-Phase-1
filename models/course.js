@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Course.belongsToMany(models.User, {
         through: models.UserCourse
       })
-      // define association here
+      Course.hasMany(models.LearningMaterial)
     }
   }
   Course.init({
