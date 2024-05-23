@@ -1,47 +1,47 @@
 [
     {
         "CourseId": 1,
-        "name": "Introduction",
-        "materials": "JavaScript is a cross-platform, object-oriented scripting language used to make webpages interactive (e.g., having complex animations, clickable buttons, popup menus, etc.). There are also more advanced server side versions of JavaScript such as Node.js, which allow you to add more functionality to a website than downloading files (such as realtime collaboration between multiple computers). Inside a host environment (for example, a web browser), JavaScript can be connected to the objects of its environment to provide programmatic control over them."
-    },
-    {
-        "CourseId": 2,
-        "name": "Variables",
-        "materials": "After reading the last couple of articles you should now know what JavaScript is, what it can do for you, how you use it alongside other web technologies, and what its main features look like from a high level. In this article, we will get down to the real basics, looking at how to work with the most basic building blocks of JavaScript — Variables."
-    },
-    {
-        "CourseId": 3,
-        "name": "Functions",
-        "materials": "Functions are one of the fundamental building blocks in JavaScript. A function in JavaScript is similar to a procedure—a set of statements that performs a task or calculates a value, but for a procedure to qualify as a function, it should take some input and return an output where there is some obvious relationship between the input and the output. To use a function, you must define it somewhere in the scope from which you wish to call it."
+        "name": "Java Script Beginner",
+        "materials": "Conditional Operator: The conditional (ternary) operator is the only JavaScript operator that takes three operands: a condition followed by a question mark (?), then an expression to execute if the condition is truthy followed by a colon (:), and finally the expression to execute if the condition is falsy. This operator is frequently used as an alternative to an if...else statement. Loops and iteration: Loops offer a quick and easy way to do something repeatedly. This chapter of the JavaScript Guide introduces the different iteration statements available to JavaScript."
     },
     {
         "CourseId": 1,
-        "name": "Arrays",
-        "materials": "Array objects cannot use arbitrary strings as element indexes (as in an associative array) but must use nonnegative integers (or their respective string form). Setting or accessing via non-integers will not set or retrieve an element from the array list itself, but will set or access a variable associated with that array's object property collection. The array's object properties and list of array elements are separate, and the array's traversal and mutation operations cannot be applied to these named properties."
-    },
-    {
-        "CourseId": 2,
-        "name": "Objects",
-        "materials": "Nearly all objects in JavaScript are instances of Object; a typical object inherits properties (including methods) from Object.prototype, although these properties may be shadowed (a.k.a. overridden). The only objects that don't inherit from Object.prototype are those with null prototype, or descended from other null prototype objects."
-    },
-    {
-        "CourseId": 3,
-        "name": "DOM Manipulation",
-        "materials": "When writing web pages and apps, one of the most common things you'll want to do is manipulate the document structure in some way. This is usually done by using the Document Object Model (DOM), a set of APIs for controlling HTML and styling information that makes heavy use of the Document object. In this article we'll look at how to use the DOM in detail, along with some other interesting APIs that can alter your environment in interesting ways."
+        "name": "Java Script Intermediate",
+        "materials": "Classes: Classes are a template for creating objects. They encapsulate data with code to work on that data. Classes in JS are built on prototypes but also have some syntax and semantics that are unique to classes. MVC: The model is the data. In this todo application, that'll be the actual todos, and the methods that will add, edit, or delete them. The view is how the data is displayed. In this todo application, that will be the rendered HTML in the DOM and CSS. The controller connects the model and the view. It takes user input, such as clicking or typing, and handles callbacks for user interactions."
     },
     {
         "CourseId": 1,
-        "name": "AJAX",
-        "materials": "AJAX = Asynchronous JavaScript And XML. AJAX is not a programming language. AJAX just uses a combination of: A browser built-in XMLHttpRequest object (to request data from a web server) JavaScript and HTML DOM (to display or use the data)"
+        "name": "Java Script Advance",
+        "materials": "Closures: Closures are when a function is defined within another function and it can access its outer function’s variables. Asynchronous: Moving onto asynchronous programming. It allows you to continue to execute JavaScript code without waiting for long-running tasks to finish. This overall prevents task blocking and improves responsiveness. A clean way to handle asynchronous code is by using Promises since it provides a structured way to handle both successful scenarios and errors."
     },
     {
         "CourseId": 2,
-        "name": "ES6",
-        "materials": "ES6 adalah sebuah singkatan dari ECMAScript versi 6. ES6 release pada tahun 2015, jadi ES6 sama ES 2015 sama aja ya. Lalu apa itu ECMAScript? ECMAScript adalah sebuah standarisasi scripting language (Javascript) yang dibuat oleh European Computer Manufacturers Association (ECMA). Bahasa gampangnya ECMAScript itu standarnya, Javascript itu implementasinya."
+        "name": "CSS Beginner",
+        "materials": "Like the HTML Beginner Tutorial, the CSS Beginner Tutorial assumes that you know as much about CSS as you do about the cumulative effects of sea squirt discharge on the brain chemistry of Germanic ammonites. The purpose of this guide is to teach the bare essentials - just enough to get started. The CSS Intermediate Tutorial and CSS Advanced Tutorial go into more depth about CSS. CSS, or Cascading Styles Sheets, is a way to style and present HTML. Whereas the HTML is the meaning or content, the style sheet is the presentation of that document."
+    },
+    {
+        "CourseId": 2,
+        "name": "CSS Intermediate",
+        "materials": "FLEXBOX: CSS provides many tools and properties that you can use to position elements on a webpage. Codecademy’s lessons on the box model and CSS display introduce a couple of these techniques. In this lesson, you will learn about Flexible Box Layout or flexbox, a tool that greatly simplifies how to position elements. There are two important components to a flexbox layout: flex containers and flex items. A flex container is an element on a page that contains flex items. All direct child elements of a flex container are flex items. This distinction is important because some of the properties you will learn in this lesson apply to flex containers while others apply to flex items. To designate an element as a flex container, set the element’s display property to flex or inline-flex. Once an item is a flex container, there are several properties we can use to specify how its children behave."
+    },
+    {
+        "CourseId": 2,
+        "name": "CSS Advance",
+        "materials": "CSS Layouts: Flexbox and Grid Modern CSS layout techniques, namely Flexbox and Grid, have revolutionized web design. We’ll dive deep into these powerful tools, exploring their features, properties, and best use cases. The Webtutor.dev guide will offer practical examples and tutorials to help you master the art of creating flexible and responsive layouts. Advanced Selectors and Pseudo-classes CSS selectors allow you to target specific elements on a web page. We’ll go beyond the basics and explore advanced selectors, including attribute selectors, sibling combinators, and pseudo-classes. The blog will highlight real-world scenarios where these selectors shine, enabling you to create targeted and dynamic styles."
     },
     {
         "CourseId": 3,
-        "name": "Frameworks",
-        "materials": "JavaScript frameworks provide structure for your code, so in that sense, they’re pretty essential to your programming. There are many useful JavaScript frameworks that developers regularly use, and we will cover some of these in this article. A JavaScript framework provides a blueprint, so you have a guide to follow rather than having to start coding your website from scratch. "
+        "name": "HTML Beginner",
+        "materials": "The History of HTML HTML was first created by Tim Berners-Lee, Robert Cailliau, and others starting in 1989. It stands for Hyper Text Markup Language. Hypertext means that the document contains links that allow the reader to jump to other places in the document or to another document altogether. The latest version is known as HTML5. A Markup Language is a way that computers speak to each other to control how text is processed and presented. To do this HTML uses two things: tags and attributes. What are Tags and Attributes? Tags and attributes are the basis of HTML. They work together but perform different functions – it is worth investing 2 minutes in differentiating the two. What Are HTML Tags? Tags are used to mark up the start of an HTML element and they are usually enclosed in angle brackets. An example of a tag is: <h1>. Most tags must be opened <h1> and closed </h1> in order to function. What are HTML Attributes? Attributes contain additional pieces of information. Attributes take the form of an opening tag and additional info is placed inside."
+    },
+    {
+        "CourseId": 3,
+        "name": "HTML Intermediate",
+        "materials": "Emmet: Emmet is a plugin, built into VS Code, that helps you write HTML and CSS more efficiently by providing a bunch of clever shortcuts. By now, you have written a good amount of HTML and CSS, and if you have been using VS Code there’s a big chance that you have already encountered Emmet in some way. SVG: SVGs are a very common image format on the web. They can be a little confusing at first, but once you know how to use them, they are an incredibly powerful tool for creating high-quality, dynamic images for your website. In this lesson, we will learn exactly what SVGs are, what they’re used for, and how you can embed them in your websites."
+    },
+    {
+        "CourseId": 3,
+        "name": "HTML Advance",
+        "materials": "The level of difficulty in learning advanced HTML and CSS can vary depending on your prior experience and familiarity with the basics of HTML and CSS. If you already have a solid foundation in HTML and CSS and are familiar with the basics of web development, then learning advanced techniques will likely be less difficult for you. Advanced CSS and HTML can be challenging to learn, but it is not necessarily difficult. CSS layout techniques, such as Flexbox and Grid, can take some time to understand and master. Creating complex animations, transforms, and 3D effects can also be challenging. But with proper guidance and resources, you can learn these techniques and improve your skills over time."
     }
 ]
