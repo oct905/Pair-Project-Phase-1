@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title> 
+    <link rel="Stylesheet" href="/styleDetail.css">
+    <link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+</head>
+<body>
+    
+    <section>
+        <header>
+            <h2><a href="#" class="logo">Logo</a></h2>
+            <div class="navigation">
+                <a href="/login">Login</a>
+                <a href="/signup">SignUp</a>
+                <a href="/user/profile">Profile</a>
+                <a href="/logout">LogOut</a>
+                <a href="#">Users</a>
+            </div>
+        </header>
+        <div class="content">
+            <div class="info">
+                <div>
+                    <img src="<%= course.imageURL %>">
+                </div>
+                <div>
+                    <h2><%= course.name %><br>
+                </div>
+                <p><%= course.description %></p>
+            </div>
+            <div class="course-container">
+                <% course.LearningMaterials.forEach((element) => { %>
+                    <div class="course-card">
+                        <div style="text-align: center; align-items: center;">
+                            <h2><%= element.name %></h2>
+                        </div>
+                        <div class="course-actions">
+                            <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><button>Begin Course</button></a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+        <div>
+        </div>
+        <div class="media-icons">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-solid fa-phone"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+    </section>
+
+</body>
+</html>
