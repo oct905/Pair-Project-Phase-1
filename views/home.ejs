@@ -44,7 +44,7 @@
                             
                             <% for ( let index = 0; index < user.UserCourses.length; index++){%>
                                 <% if (user.UserCourses[index].CourseId === element.id) { %>
-                                    <a href=""><button>Learn</button></a>
+                                    <a href="/course/<%= element.id %>"><button>Learn</button></a>
                                     <% break %>
                                 <% } %>
                                 <% if (index === user.UserCourses.length - 1) { %>

@@ -3,7 +3,6 @@ const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../mode
 module.exports = class Controller {
     static async renderLandingPage(req, res) {
         try {
-            
             if (req.session.user) {
                 console.log(`login`);
 
@@ -83,10 +82,13 @@ module.exports = class Controller {
 
     static async renderDetail(req, res) {
         try {
-            let UserId = req.session.user.id
-            let user = await User.findByPk(UserId, {
-                include: UserCourse
-            })
+            let userId = req.session.user
+            let user = ''
+            if(userId){
+                user = await User.findByPk(userId.id, {
+                    include: UserCourse
+                })
+            }
             user = JSON.parse(JSON.stringify(user))
             delete req.session.user
             req.session.user = user
@@ -100,8 +102,8 @@ module.exports = class Controller {
                 },
                     LearningMaterial,
                 ]
-            })
-            res.render(`detailCourse`, { course })
+            });
+            res.render(`detailCourse`, { course, user, id })
         } catch (error) {
             res.send(error)
         }

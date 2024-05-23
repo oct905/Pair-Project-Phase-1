@@ -20,7 +20,8 @@ module.exports = class Check {
     }
 
     static isEnrolled(req, res, next) {
-        
+        console.log(req.session.user);
+        next()
     }
 
 }   
