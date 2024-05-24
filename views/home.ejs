@@ -13,10 +13,16 @@
     <section>
         <header>
             <h2><img src="/public/logo.png"></h2>
-            <form action="/" method="get">
-                <input type="text" name="search" placeholder="Search Course">
-                <input type="submit">
-            </form>
+            <div>
+              
+                <form action="/" class="search-bar" method="get">
+                    <input type="search" name="search" pattern=".*\S.*" placeholder="Search Course">
+                    <button class="search-btn" type="submit">
+                      <span>Search</span>
+                    </button>
+                  </form>
+
+            </div>
             <div class="navigation">
                 <% if (!user) { %>
                     <a href="/login">Login</a>

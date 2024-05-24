@@ -22,9 +22,13 @@
 
             <% if (msg) { %>
                 <% msg.forEach(element => { %>
-                    <label for=""><%= element %></label>
+                    <div class="errors">
+
+                        <label for=""><%= element %></label>
+                    </div>
                 <% }) %>
             <% } %>
+            <br>
             <form action="/signup/" method="post">
                 <div class="input-field">
                     <input type="text" class="input" name="userName" placeholder="Username">
