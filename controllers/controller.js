@@ -7,16 +7,16 @@ module.exports = class Controller {
             let search = req.query.search
             let course = {}
             console.log(search);
-            if (search){
+            if (search) {
                 course = await Course.findAll({
                     include: UserCourse,
-                    where : {
+                    where: {
                         name: {
                             [Op.iLike]: `%${search}%`
                         }
                     }
                 })
-            }else{
+            } else {
                 course = await Course.findAll({
                     include: UserCourse
                 })
@@ -73,7 +73,7 @@ module.exports = class Controller {
         if (msg) {
             msg = msg.split(',')
         }
-        res.render(`login`,{ msg })
+        res.render(`login`, { msg })
     }
 
     static async handleLogin(req, res) {
@@ -99,13 +99,7 @@ module.exports = class Controller {
             req.session.user = user
             res.redirect('/')
         } catch (error) {
-            if (error.name === `SequelizeValidationError`) {
-                let msg = error.errors.map(el => el.message)
-                console.log(msg);
-                res.redirect(`/login?error=${msg}`)
-            } else {
-                res.redirect(`/login?error=${error}`)
-            }
+            res.redirect(`/login?error=${error}`)
         }
     }
 

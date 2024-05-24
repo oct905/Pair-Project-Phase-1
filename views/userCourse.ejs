@@ -39,7 +39,7 @@
                         <% if (!element.completedDate) { %>
                             <td class="py-2 px-4 text-yellow-500">Ongoing</td>
                         <% } else { %>
-                            <td class="py-2 px-4 text-green-500">Completed At <%= element.completedDate %></td>
+                            <td class="py-2 px-4 text-green-500"><%= UserCourse.report(element.completedDate) %></td>
                         <% } %>
                         <td class="py-2 px-4">
                             <a href="/admin/delete/<%= element.id %>">

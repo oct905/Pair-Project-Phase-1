@@ -6,7 +6,7 @@ module.exports = class ControllerAdmin{
             let data = await UserCourse.findAll({
                 include :[Course, User]
             })
-            res.render(`userCourse`, {data})
+            res.render(`userCourse`, {data, UserCourse})
         } catch (error) {
             res.send(error)
         }

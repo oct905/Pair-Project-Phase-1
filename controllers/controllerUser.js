@@ -4,13 +4,17 @@ const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../mode
 module.exports = class ControllerUser {
     static async renderProfile(req, res) {
         try {
+            let msg = req.query.error
+            if (msg) {
+                msg = msg.split(',')
+            }
             let id = req.session.user.id
             let profile = await Profile.findOne({
                 where: {
                     UserId: id
                 }
             })
-            res.render(`profile`, { profile })
+            res.render(`profile`, { profile, msg })
         } catch (error) {
             res.send(error)
         }
@@ -29,7 +33,13 @@ module.exports = class ControllerUser {
             })
             res.redirect(`/user/profile`)
         } catch (error) {
-            res.send(error)
+            if (error.name === `SequelizeValidationError`) {
+                let msg = error.errors.map(el => el.message)
+                console.log(msg);
+                res.redirect(`/user/profile?error=${msg}`)
+            } else {
+                res.redirect(`/user/profile?error=${error}`)
+            }
         }
     }
 
@@ -97,7 +107,7 @@ module.exports = class ControllerUser {
     }
 
     static download(req, res, next) {
-        let name = `${req.session.course} ${req.session.data.name}`
+        let name = `${req.session.course}-${req.session.data.name}`
         let materi = req.session.data.materials
         const stream = res.writeHead(200, {
             'Content-Type': 'application/pdf',

@@ -13,18 +13,6 @@ user.get(`/course/:id/learn/:idmat`, Check.isLoggedIn, Check.isUser, Check.isEnr
 
 user.get(`/course/:id/learn/:idmat/complete`, Check.isLoggedIn, Check.isUser, Check.isEnrolled, ControllerUser.handleComplete)
 user.get(`/download/:id`, ControllerUser.download)
-// user.get(`/download/:id`, async (req, res, next) => {
-//     const stream = res.writeHead(200, {
-//         'Content-Type' : 'application/pdf',
-//         'content-disposition' : 'attachment;filename=materi.pdf'
-//     })
-//     let materi = req.session.data.materials
-//     pdfService.buildPDF(
-//         (chunk) => stream.write(chunk),
-//         () => stream.end(),
-//         materi
-//     )
-// })
 
 
 module.exports = user
