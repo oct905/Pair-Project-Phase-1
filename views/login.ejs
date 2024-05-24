@@ -21,12 +21,16 @@
             </div>
             <% if (msg) { %>
                 <% msg.forEach(element => { %>
-                    <label for=""><%= element %></label>
+                    <div class="errors">
+                        <label for=""><%= element %></label>
+
+                    </div>
                 <% }) %>
             <% } %>
+            <br>
             <form action="/login/" method="post">
                 <div class="input-field">
-                    <input type="text" class="input" name="userName" placeholder="Username/email">
+                    <input type="text" class="input" name="userName" placeholder="Username">
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-field">

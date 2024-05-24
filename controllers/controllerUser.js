@@ -72,8 +72,16 @@ module.exports = class ControllerUser {
             let user = req.session.user
             req.session.data = data
             let course = await Course.findByPk(id)
-            req.session.course = course.name
-            res.render(`learningMaterial`, { data, id, user })
+            req.session.course = course.name//
+            let check = await UserCourse.findOne({
+                where:{
+                    UserId : user.id,
+                    CourseId : id
+                }
+            })
+            console.log(check, `Check`);
+            //
+            res.render(`learningMaterial`, { data, id, user, check })
         } catch (error) {
             res.send(error)
         }

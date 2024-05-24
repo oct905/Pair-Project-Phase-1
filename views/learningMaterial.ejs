@@ -28,19 +28,17 @@
                         <div class="course-actions">
                             <% if (user.role === `admin`) { %>
                             <% } else { %>
+                                <% if (check) { %>
                                 <a href="/user/download/<%= data.id %>"><button>Download</button></a>
-                                <a href="/user/course/<%= id %>/learn/<%= data.id %>/complete"><button>Complete</button></a>
+                                    <a href="/user/course/<%= id %>/learn/<%= data.id %>/complete"><button>Complete</button></a>
+                                <% } %>
                             <% } %>
                         </div>
             </div>
         </div>
         <div>
         </div>
-        <div class="media-icons">
-            <a href="#"><i class="fa-solid fa-envelope"></i></a>
-            <a href="#"><i class="fa-solid fa-phone"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-        </div>
+       
     </section>
 
 </body>
