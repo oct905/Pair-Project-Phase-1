@@ -55,12 +55,15 @@
                             <h2><%= element.name %></h2>
                         </div>
                         <div class="course-actions">
-                            <% if (user.role === `admin`) { %>
-                                <a href="/admin/course/<%= course.id %>/learn/<%= element.id %>"><button>Material Detail</button></a>
-                            <% } else { %>
-                                <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><button>Begin Course</button></a>
+                            <%// if (user) { %>
                              
-                            <% } %>
+                                <% if (user.role === `admin`) { %>
+                                    <a href="/admin/course/<%= course.id %>/learn/<%= element.id %>"><button>Material Detail</button></a>
+                                <% } else { %>
+                                    <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><button>Begin Course</button></a>
+                                 
+                                <% } %>
+                            <%// } %>
                         </div>
                     </div>
                 <% }) %>
