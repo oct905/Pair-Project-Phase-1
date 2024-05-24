@@ -57,11 +57,12 @@ module.exports = class ControllerUser {
 
     static async renderLearn(req, res) {
         try {
-            console.log(req.params);
             let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
             let user = req.session.user
             req.session.data = data
+            let course = await Course.findByPk(id)
+            req.session.course = course.name
             res.render(`learningMaterial`, { data, id, user })
         } catch (error) {
             res.send(error)
@@ -95,19 +96,17 @@ module.exports = class ControllerUser {
         }
     }
 
-    // static async download(res, req, next) {
-    //     try {
-    //         console.log(`download controller`);
-    //         const stream = res.writeHead(200, {
-    //             'Content-Type': 'application/pdf',
-    //             'content-disposition': 'attachment;filename=invoice.pdf'
-    //         })
-    //         pdfService.buildPDF(
-    //             (chunk) => stream.write(chunk),
-    //             () => stream.end()
-    //         )
-    //     } catch (error) {
-    //         res.send(error)
-    //     }
-    // }
+    static download(req, res, next) {
+        let name = `${req.session.course} ${req.session.data.name}`
+        let materi = req.session.data.materials
+        const stream = res.writeHead(200, {
+            'Content-Type': 'application/pdf',
+            'content-disposition': `attachment;filename=${name}.pdf`
+        })
+        pdfService.buildPDF(
+            (chunk) => stream.write(chunk),
+            () => stream.end(),
+            materi
+        )
+    }
 }

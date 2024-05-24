@@ -1,19 +1,32 @@
 const bcryptjs = require('bcryptjs')
 const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../models`)
+const { Op } = require('sequelize')
 module.exports = class Controller {
     static async renderLandingPage(req, res) {
         try {
+            let search = req.query.search
+            let course = {}
+            console.log(search);
+            if (search){
+                course = await Course.findAll({
+                    include: UserCourse,
+                    where : {
+                        name: {
+                            [Op.iLike]: `%${search}%`
+                        }
+                    }
+                })
+            }else{
+                course = await Course.findAll({
+                    include: UserCourse
+                })
+            }
             if (req.session.user) {
                 console.log(`login`);
 
             } else {
                 console.log(`logout`);
             }
-
-            let course = await Course.findAll({
-                include: UserCourse
-            })
-
             let user = req.session.user
             res.render('home', { course, user })
         } catch (error) {

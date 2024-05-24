@@ -13,6 +13,10 @@
     <section>
         <header>
             <h2><img src="/public/logo.png"></h2>
+            <form action="/" method="get">
+                <input type="text" name="search" placeholder="Search Course">
+                <input type="submit">
+            </form>
             <div class="navigation">
                 <% if (!user) { %>
                     <a href="/login">Login</a>
@@ -34,8 +38,6 @@
                         <span>Hallo <%= user.userName %></span></h2>
                     <% } %>
                 </div>
-                <p>emote: Enumerating objects: 48, done. remote: Counting objects: 100% (48/48), done. remote: Compressing objects: 100% (25/25), done.</p>
-                <a href="#" class="info-btn">More Info</a>
             </div>
         </div>
         <div>
