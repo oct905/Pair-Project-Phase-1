@@ -4,13 +4,17 @@ const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../mode
 module.exports = class ControllerUser {
     static async renderProfile(req, res) {
         try {
+            let msg = req.query.error
+            if (msg) {
+                msg = msg.split(',')
+            }
             let id = req.session.user.id
             let profile = await Profile.findOne({
                 where: {
                     UserId: id
                 }
             })
-            res.render(`profile`, { profile })
+            res.render(`profile`, { profile, msg })
         } catch (error) {
             res.send(error)
         }
@@ -29,7 +33,13 @@ module.exports = class ControllerUser {
             })
             res.redirect(`/user/profile`)
         } catch (error) {
-            res.send(error)
+            if (error.name === `SequelizeValidationError`) {
+                let msg = error.errors.map(el => el.message)
+                console.log(msg);
+                res.redirect(`/user/profile?error=${msg}`)
+            } else {
+                res.redirect(`/user/profile?error=${error}`)
+            }
         }
     }
 
@@ -57,11 +67,12 @@ module.exports = class ControllerUser {
 
     static async renderLearn(req, res) {
         try {
-            console.log(req.params);
             let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
             let user = req.session.user
             req.session.data = data
+            let course = await Course.findByPk(id)
+            req.session.course = course.name
             res.render(`learningMaterial`, { data, id, user })
         } catch (error) {
             res.send(error)
@@ -95,19 +106,17 @@ module.exports = class ControllerUser {
         }
     }
 
-    // static async download(res, req, next) {
-    //     try {
-    //         console.log(`download controller`);
-    //         const stream = res.writeHead(200, {
-    //             'Content-Type': 'application/pdf',
-    //             'content-disposition': 'attachment;filename=invoice.pdf'
-    //         })
-    //         pdfService.buildPDF(
-    //             (chunk) => stream.write(chunk),
-    //             () => stream.end()
-    //         )
-    //     } catch (error) {
-    //         res.send(error)
-    //     }
-    // }
+    static download(req, res, next) {
+        let name = `${req.session.course}-${req.session.data.name}`
+        let materi = req.session.data.materials
+        const stream = res.writeHead(200, {
+            'Content-Type': 'application/pdf',
+            'content-disposition': `attachment;filename=${name}.pdf`
+        })
+        pdfService.buildPDF(
+            (chunk) => stream.write(chunk),
+            () => stream.end(),
+            materi
+        )
+    }
 }

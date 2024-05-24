@@ -24,14 +24,12 @@ module.exports = (sequelize, DataTypes) => {
     static report(raw) {
       const date = new Date(raw)
       const format = {
-        weekday: 'long',
         day: 'numeric',
         month: 'long',
         year: 'numeric'
       }
 
       const idDate = date.toLocaleDateString('id-ID', format)
-      console.log(idDate);
       return `Completed at ${idDate}`
     }
     

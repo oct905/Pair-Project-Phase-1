@@ -33,13 +33,13 @@
             <tbody>
                 <% data.forEach(element => { %>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-2 px-4"><%= element.UserId %></td>
-                        <td class="py-2 px-4"><%= element.CourseId %></td>
+                        <td class="py-2 px-4"><%= element.User.userName %></td>
+                        <td class="py-2 px-4"><%= element.Course.name %></td>
                         <td class="py-2 px-4"><%= element.localDateId %></td>
                         <% if (!element.completedDate) { %>
                             <td class="py-2 px-4 text-yellow-500">Ongoing</td>
                         <% } else { %>
-                            <td class="py-2 px-4 text-green-500">Completed At <%= element.completedDate %></td>
+                            <td class="py-2 px-4 text-green-500"><%= UserCourse.report(element.completedDate) %></td>
                         <% } %>
                         <td class="py-2 px-4">
                             <a href="/admin/delete/<%= element.id %>">

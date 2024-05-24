@@ -3,8 +3,10 @@ const { Course, UserCourse, User, LearningMaterial, Profile } = require(`../mode
 module.exports = class ControllerAdmin{
     static async renderUserCourse(req, res){
         try {
-            let data = await UserCourse.findAll()
-            res.render(`userCourse`, {data})
+            let data = await UserCourse.findAll({
+                include :[Course, User]
+            })
+            res.render(`userCourse`, {data, UserCourse})
         } catch (error) {
             res.send(error)
         }
@@ -12,10 +14,10 @@ module.exports = class ControllerAdmin{
 
     static async renderLearn(req, res) {
         try {
-            console.log(req.params);
             let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
             let user = req.session.user
+            
             res.render(`learningMaterial`, { data, id, user })
         } catch (error) {
             res.send(error)

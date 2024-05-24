@@ -31,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: 'Email is is empty'
+        },
+        isEmail: {
+          msg: `Email Format is Wrong`
         }
       }
     },

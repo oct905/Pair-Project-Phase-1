@@ -20,17 +20,22 @@
                 <header>SignUp</header>
             </div>
 
+            <% if (msg) { %>
+                <% msg.forEach(element => { %>
+                    <label for=""><%= element %></label>
+                <% }) %>
+            <% } %>
             <form action="/signup/" method="post">
                 <div class="input-field">
-                    <input type="text" class="input" name="userName" placeholder="Username" required>
+                    <input type="text" class="input" name="userName" placeholder="Username">
                     <i class="bx bx-user"></i>
                 </div>
                 <div class="input-field">
-                    <input type="email" class="input" name="email" placeholder="Email" required>
+                    <input type="email" class="input" name="email" placeholder="Email">
                     <i class="fa-regular fa-envelope"></i>
                 </div>
                 <div class="input-field">
-                    <input type="password" class="input" name="password" placeholder="Password" required>
+                    <input type="password" class="input" name="password" placeholder="Password">
                     <i class="bx bx-lock-alt"></i>
                 </div>
                 <div class="input-field">
