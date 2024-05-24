@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Course</title>
+    <link rel="stylesheet" href="styleHome.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FFFAE6;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-10">
+    <div class="navigation" style="color: #fff; background-color: rgb(241, 102, 52); font-weight: 500; text-decoration: none; letter-spacing: 1px; padding: 5px 15px; border-radius: 20px; transition: 0.3; transition-property: bacground; ">
+        <a href="/" class="text-blue-500 hover:underline mb-5">
+            <button style="color: #fff;">Home</button>
+        </a>
+    </div>
+    <h1 class="text-3xl font-bold mb-5" style="margin-top: 20px;">User Course</h1>
+    <div class="overflow-x-auto w-full max-w-4xl">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead>
+                <tr class="bg-gray-100 border-b">
+                    <th class="py-2 px-4 text-left">Username</th>
+                    <th class="py-2 px-4 text-left">Course</th>
+                    <th class="py-2 px-4 text-left">Enroll Date</th>
+                    <th class="py-2 px-4 text-left">Status</th>
+                    <th class="py-2 px-4 text-left">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(element => { %>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-2 px-4"><%= element.User.userName %></td>
+                        <td class="py-2 px-4"><%= element.Course.name %></td>
+                        <td class="py-2 px-4"><%= element.localDateId %></td>
+                        <% if (!element.completedDate) { %>
+                            <td class="py-2 px-4 text-yellow-500">Ongoing</td>
+                        <% } else { %>
+                            <td class="py-2 px-4 text-green-500"><%= UserCourse.report(element.completedDate) %></td>
+                        <% } %>
+                        <td class="py-2 px-4">
+                            <a href="/admin/delete/<%= element.id %>">
+                                <button style="color: #fff; background-color: rgb(241, 102, 52); font-weight: 500; text-decoration: none; letter-spacing: 1px; padding: 5px 10px; border-radius: 20px; transition: 0.3; transition-property: bacground;">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

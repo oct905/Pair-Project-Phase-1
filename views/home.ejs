@@ -3,16 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home Page</title> 
+    <link rel="Stylesheet" href="/styleHome.css">
+    <link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
 </head>
 <body>
-    <div>
-        <a href="/login"><button>Login</button></a>
-        <a href="/signup"><button>Sign Up</button></a>
-    </div>
-    <h1>Home Page</h1>
-    <a href="/course/id"><button>Detail</button></a>
-    <a href="/user/username/enroll"><button>Enroll</button></a>
     
+    <section>
+        <header>
+            <h2><img src="/public/logo.png"></h2>
+            <div>
+              
+                <form action="/" class="search-bar" method="get">
+                    <input type="search" name="search" pattern=".*\S.*" placeholder="Search Course">
+                    <button class="search-btn" type="submit">
+                      <span>Search</span>
+                    </button>
+                  </form>
+
+            </div>
+            <div class="navigation">
+                <% if (!user) { %>
+                    <a href="/login">Login</a>
+                    <a href="/signup">SignUp</a>
+                <% } else if (user.role === `admin`) { %>
+                    <a href="/admin/usercourse">Users</a>
+                    <a href="/logout">LogOut</a>
+                <% } else { %>
+                    <a href="/user/profile">Profile</a>
+                    <a href="/logout">LogOut</a>
+                <% } %>
+            </div>
+        </header>
+        <div class="content">
+            <div class="info"> 
+                <div>
+                    <h2>Hackedu<br>
+                    <% if (user) { %>
+                        <span>Hallo <%= user.userName %></span></h2>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="course-container">
+                <% course.forEach(element => { %>
+                    <div class="course-card">
+                        <img src="<%= element.imageURL %>" alt="<%= element.name %>">
+                        <div style="width: 250px; height: 80px; text-align: center; align-items: center;">
+
+                            <h2><%= element.name %></h2>
+                        </div>
+                        <div style="height: 150px; overflow-y: auto;">
+                            <p><%= element.description %></p>
+                        </div>
+                        <div class="course-actions">
+                            <% if (user) { %>
+                                <% if (user.role === `admin`) { %>
+                                    <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                <% } else if (user.UserCourses.length === 0) { %>
+                                    <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                    <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                                <% } %>
+                                
+                                <% for ( let index = 0; index < user.UserCourses.length; index++){%>
+                                    <% if (user.UserCourses[index].CourseId === element.id) { %>
+                                        <a href="/course/<%= element.id %>"><button>Learn</button></a>
+                                        <% break %>
+                                    <% } %>
+                                    <% if (index === user.UserCourses.length - 1) { %>
+                                        <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                        <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                                    <% } %>
+                                <% } %>
+                            <% } else { %>
+                                <a href="/course/<%= element.id %>"><button>Detail</button></a>
+                                <a href="/user/enroll/course/<%= element.id %>"><button>Enroll</button></a>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>

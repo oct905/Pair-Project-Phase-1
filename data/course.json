@@ -1,13 +1,17 @@
-[{
-    "name": "Introduction to Programming",
-    "description": "Programming refers to a technological process for telling a computer which tasks to perform in order to solve problems. You can think of programming as a collaboration between humans and computers, in which humans create instructions for a computer to follow (code) in a language computers can understand",
-    "imageURL": "http://dummyimage.com/247x100.png/5fa2dd/ffffff"
-  }, {
-    "name": "Data Structures and Algorithms",
-    "description": "Data Structures is about how data can be stored in different structures. Algorithms is about how to solve different problems, often by searching through and manipulating data structures.",
-    "imageURL": "http://dummyimage.com/102x100.png/5fa2dd/ffffff"
-  }, {
-    "name": "Web Development",
-    "description": "Web development, also known as website development, refers to the tasks associated with creating, building, and maintaining websites and web applications that run online on a browser.",
-    "imageURL": "http://dummyimage.com/119x100.png/cc0000/ffffff"
-  }]
+[
+  {
+    "name": "Java Script",
+    "description": "JavaScript is a scripting or programming language that allows you to implement complex features on web pages",
+    "imageURL": "https://it.telkomuniversity.ac.id/wp-content/uploads/2023/01/Javascript-adalah-1.jpg"
+  },
+  {
+    "name": "Cascading Style Sheets",
+    "description": "CSS allows you to create great-looking web pages, but how does it work under the hood? This article explains what CSS is with a simple syntax example and also covers some key terms about the language.",
+    "imageURL": "https://miro.medium.com/v2/resize:fit:1200/format:webp/1*OFsc0SD55jhi8cjo7aCA4w.jpeg"
+  },
+  {
+    "name": "HTML",
+    "description": "HyperText Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. It defines the content and structure of web content.",
+    "imageURL": "https://sevima.com/wp-content/uploads/2012/11/html5.jpg"
+  }
+]

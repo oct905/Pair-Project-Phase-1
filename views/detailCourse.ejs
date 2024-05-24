@@ -3,12 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Course</title>
+    <title>Home Page</title> 
+    <link rel="Stylesheet" href="/styleDetail.css">
+    <link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
 </head>
 <body>
-    <a href="/"><button>Home</button></a>
-    <h1>Detail Course</h1>
-    <a href="/user/username/course/id/learn"><button>Learn</button></a>
-    <a href="/user/username/enroll"><button>Enroll</button></a>
+    
+    <section>
+        <header>
+            <h2><a href="#" class="logo">Logo</a></h2>
+            <div class="navigation">
+                <a href="/">Home</a>
+            </div>
+        </header>
+        <div class="content">
+            <div class="info">
+                <div>
+                    <img src="<%= course.imageURL %>">
+                </div>
+                <div>
+                    <h2><%= course.name %><br>
+                    </div>
+                    <p><%= course.description %></p>
+                    <div class="course-actions">
+                        <% if (user) { %>
+                            <% if (user.role === `admin`) { %>
+                                
+                            <% } else if (user.UserCourses.length === 0) { %>
+                                <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>
+                            <% } %>
+                    
+                            <% for( let index = 0; index < user.UserCourses.length; index++ ) { %>
+                                <% if (course.id === user.UserCourses[index].CourseId) { %>
+                                    <% break %>
+                                <% } %>
+                    
+                                <% if (index === user.UserCourses.length - 1 ) { %>
+                                    <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>       
+                                <% } %>
+                            <% } %>
+                        <% } else { %>
+                                <a href="/user/enroll/course/<%= course.id %>"><button>Enroll</button></a>       
+                        <% } %>
+                    </div>
+            </div>
+            <div class="course-container">
+                <% course.LearningMaterials.forEach((element) => { %>
+                    <div class="course-card">
+                        <div style="text-align: center; align-items: center;">
+                            <h2><%= element.name %></h2>
+                        </div>
+                        <div class="course-actions">
+                            <%// if (user) { %>
+                             
+                                <% if (user.role === `admin`) { %>
+                                    <a href="/admin/course/<%= course.id %>/learn/<%= element.id %>"><button>Material Detail</button></a>
+                                <% } else { %>
+                                    <a href="/user/course/<%= course.id %>/learn/<%= element.id %>"><button>Begin Course</button></a>
+                                 
+                                <% } %>
+                            <%// } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+        <div>
+        </div>
+       
+    </section>
+
 </body>
 </html>

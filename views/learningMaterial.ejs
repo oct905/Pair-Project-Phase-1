@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Material</title>
+    <title>Home Page</title> 
+    <link rel="Stylesheet" href="/styleLearning.css">
+    <link rel="Stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
 </head>
 <body>
-    <a href="/course/id"><button>Back</button></a>
-    <h1>Learning Material</h1>
-    <a href="/user/username/course/id/learn/complete"><button>Complete</button></a>
+    
+    <section>
+        <header>
+            <h2><a href="#" class="logo">Logo</a></h2>
+            <div class="navigation">
+                <a href="/course/<%= id %>">Back</a>
+            </div>
+        </header>
+        <div class="content">
+                 <div class="course-card" style= "height: 500;">
+                        <div style= "height: 80px; text-align: center; align-items: center;">
+                            <h2><%= data.name %></h2>
+                        </div>
+                        <div style="height: 150px; overflow-y: auto;">
+                            <p><%= data.materials %></p>
+                        </div>
+                        <div class="course-actions">
+                            <% if (user.role === `admin`) { %>
+                            <% } else { %>
+                                <% if (check) { %>
+                                <a href="/user/download/<%= data.id %>"><button>Download</button></a>
+                                    <a href="/user/course/<%= id %>/learn/<%= data.id %>/complete"><button>Complete</button></a>
+                                <% } %>
+                            <% } %>
+                        </div>
+            </div>
+        </div>
+        <div>
+        </div>
+       
+    </section>
+
 </body>
 </html>
