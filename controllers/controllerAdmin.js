@@ -14,10 +14,10 @@ module.exports = class ControllerAdmin{
 
     static async renderLearn(req, res) {
         try {
-            console.log(req.params);
             let { id, idmat } = req.params
             let data = await LearningMaterial.findByPk(idmat)
             let user = req.session.user
+            
             res.render(`learningMaterial`, { data, id, user })
         } catch (error) {
             res.send(error)
